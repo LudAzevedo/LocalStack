@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - Feature/Localstack
   pull_request:
     branches:
       - main
