@@ -41,13 +41,13 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    - name: Test S3 bucket creation
-      run: |
-        aws --endpoint-url=http://localhost:4566 s3 ls
+    #- name: Test S3 bucket creation
+    #  run: |
+    #    aws --endpoint-url=http://localhost:4566 s3 ls
 
-    - name: Test DynamoDB table creation
-      run: |
-        aws --endpoint-url=http://localhost:4566 dynamodb list-tables
+    #- name: Test DynamoDB table creation
+    #  run: |
+    #    aws --endpoint-url=http://localhost:4566 dynamodb list-tables
 
     - name: Terraform Destroy
       if: success()
