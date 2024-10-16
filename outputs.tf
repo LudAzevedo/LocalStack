@@ -14,10 +14,6 @@ output "sns_topic_arn" {
   value = aws_sns_topic.my_topic.arn
 }
 
-output "lambda_function_arn" {
-  value = aws_lambda_function.my_lambda.arn
-}
-
 output "log_group_name" {
   value = aws_cloudwatch_log_group.my_log_group.name
 }
