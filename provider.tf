@@ -4,7 +4,7 @@ provider "aws" {
   region                      = "us-east-1"
   skip_credentials_validation = true
   skip_metadata_api_check     = true
-  skip_requesting_account_id  = true  # Evita a tentativa de recuperação do ID da conta
+  skip_requesting_account_id  = true
   s3_use_path_style           = true
 
   endpoints {
@@ -14,6 +14,7 @@ provider "aws" {
     sns      = "http://localhost:4566"
     lambda   = "http://localhost:4566"
     logs     = "http://localhost:4566"
-    iam      = "http://localhost:4566" # Adicionando o endpoint do IAM
+    iam      = "http://localhost:4566"
   }
 }
+
