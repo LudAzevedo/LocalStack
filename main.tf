@@ -1,23 +1,9 @@
-provider "aws" {
-  access_key                  = "test"
-  secret_key                  = "test"
-  region                      = "us-east-1"
-  skip_credentials_validation = true
-  skip_metadata_api_check     = true
-  skip_requesting_account_id  = true
-
-  s3_use_path_style = true # Forçar o uso do estilo de caminho ao invés de subdomínio
-
-  endpoints {
-    s3      = "http://localhost:4566"
-    dynamodb = "http://localhost:4566"
-  }
-}
-
+# Definir um bucket S3
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "my-local-bucket"
 }
 
+# Definir uma tabela DynamoDB
 resource "aws_dynamodb_table" "my_table" {
   name           = "my-local-table"
   billing_mode   = "PAY_PER_REQUEST"
@@ -29,4 +15,19 @@ resource "aws_dynamodb_table" "my_table" {
   }
 }
 
+# Definir uma fila SQS
+resource "aws_sqs_queue" "my_queue" {
+  name = "my-local-queue"
+  visibility_timeout_seconds = 30
+}
 
+# Definir um tópico SNS
+resource "aws_sns_topic" "my_topic" {
+  name = "my-local-topic"
+}
+
+# Definir um grupo de logs no CloudWatch Logs
+resource "aws_cloudwatch_log_group" "my_log_group" {
+  name              = "/aws/lambda/my-local-log-group"
+  retention_in_days = 14
+}
