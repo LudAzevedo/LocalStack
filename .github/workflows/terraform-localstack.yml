@@ -19,9 +19,11 @@ jobs:
         ports:
           - 4566:4566
         options: --health-cmd "curl -f http://localhost:4566/_localstack/health || exit 1" --health-interval 5s --health-timeout 2s --health-retries 20
+
     env:
       AWS_ACCESS_KEY_ID: "test"
       AWS_SECRET_ACCESS_KEY: "test"
+      DESTROY_RESOURCES: ${{ secrets.DESTROY_RESOURCES }} # Defina essa variável como "true" ou "false" no GitHub Secrets
 
     steps:
     - name: Checkout repository
@@ -41,16 +43,6 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    #- name: Test S3 bucket creation
-    #  run: |
-    #    aws --endpoint-url=http://localhost:4566 s3 ls
-
-    #- name: Test DynamoDB table creation
-    #  run: |
-    #    aws --endpoint-url=http://localhost:4566 dynamodb list-tables
-
     - name: Terraform Destroy
-      if: success()
+      if: env.DESTROY_RESOURCES == 'false'
       run: terraform destroy -auto-approve
-
-
