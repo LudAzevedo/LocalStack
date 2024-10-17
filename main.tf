@@ -1,33 +1,29 @@
-# Definir um bucket S3
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-local-bucket"
-}
-
-# Definir uma tabela DynamoDB
-resource "aws_dynamodb_table" "my_table" {
-  name           = "my-local-table"
-  billing_mode   = "PAY_PER_REQUEST"
-  hash_key       = "id"
-
-  attribute {
-    name = "id"
-    type = "S"
+provider "aws" {
+  access_key                  = "test"
+  secret_key                  = "test"
+  region                      = "us-east-1"
+  s3_force_path_style         = true
+  skip_credentials_validation = true
+  skip_metadata_api_check     = true
+  skip_requesting_account_id  = true
+  endpoints {
+    s3    = "http://localhost:4566"
+    sqs   = "http://localhost:4566"
+    dynamodb = "http://localhost:4566"
   }
 }
 
-# Definir uma fila SQS
-resource "aws_sqs_queue" "my_queue" {
-  name = "my-local-queue"
-  visibility_timeout_seconds = 30
+module "s3_bucket" {
+  source      = "./modules/s3"
+  bucket_name = "meu-bucket-teste"
 }
 
-# Definir um tópico SNS
-resource "aws_sns_topic" "my_topic" {
-  name = "my-local-topic"
+module "sqs_queue" {
+  source     = "./modules/sqs"
+  queue_name = "minha-fila-teste"
 }
 
-# Definir um grupo de logs no CloudWatch Logs
-resource "aws_cloudwatch_log_group" "my_log_group" {
-  name              = "/aws/lambda/my-local-log-group"
-  retention_in_days = 14
+module "dynamodb_table" {
+  source     = "./modules/dynamodb"
+  table_name = "minha-tabela-teste"
 }
