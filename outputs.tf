@@ -1,19 +1,25 @@
-output "s3_bucket_id" {
-  value = aws_s3_bucket.my_bucket.id
+output "s3_bucket_arn" {
+  description = "ARN do bucket S3 criado"
+  value       = module.s3_bucket.bucket_arn
 }
 
 output "dynamodb_table_name" {
-  value = aws_dynamodb_table.my_table.name
+  description = "Nome da tabela DynamoDB criada"
+  value       = module.dynamodb_table.table_name
 }
 
 output "sqs_queue_url" {
-  value = aws_sqs_queue.my_queue.id
+  description = "URL da fila SQS criada"
+  value       = module.sqs_queue.queue_url
 }
 
 output "sns_topic_arn" {
-  value = aws_sns_topic.my_topic.arn
+  description = "ARN do tópico SNS criado"
+  value       = module.sns_topic.topic_arn
 }
 
 output "log_group_name" {
-  value = aws_cloudwatch_log_group.my_log_group.name
+  description = "Nome do grupo de logs CloudWatch criado"
+  value       = module.cloudwatch_log_group.log_group_name
 }
+
