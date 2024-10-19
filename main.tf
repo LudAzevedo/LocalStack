@@ -16,7 +16,10 @@ module "sns_topic" {
 }
 
 module "cloudwatch_log_group" {
-  source         = "./modules/cloudwatch"
-  log_group_name = "meu-grupo-de-log"
+  source          = "./modules/cloudwatch"
+  log_group_name  = "meu-grupo-de-log"
+  retention_in_days = 14
+
 }
+
 
