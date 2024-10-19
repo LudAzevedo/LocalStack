@@ -1,7 +1,4 @@
-module "s3_bucket" {
-  source      = "./modules/s3"
-  bucket_name = "meu-bucket-teste"
-}
+
 
 module "sqs_queue" {
   source     = "./modules/sqs"

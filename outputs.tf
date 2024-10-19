@@ -1,7 +1,4 @@
-output "s3_bucket_arn" {
-  description = "ARN do bucket S3 criado"
-  value       = module.s3_bucket.bucket_arn
-}
+
 
 output "dynamodb_table_name" {
   description = "Nome da tabela DynamoDB criada"

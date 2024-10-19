@@ -4,12 +4,6 @@ variable "region" {
   default     = "us-east-1"
 }
 
-variable "bucket_name" {
-  description = "Nome do bucket S3"
-  type        = string
-  default     = "meu-bucket-teste"
-}
-
 variable "queue_name" {
   description = "Nome da fila SQS"
   type        = string
